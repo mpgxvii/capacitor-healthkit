@@ -556,11 +556,11 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
             call.reject("Must provide sampleNames")
             return
         }
-        guard let _startDate = call.options["startDate"] as? Date else {
+        guard let startDateString = call.options["startDate"] as? String else {
             call.reject("Must provide startDate")
             return
         }
-        guard let _endDate = call.options["endDate"] as? Date else {
+        guard let endDateString = call.options["endDate"] as? String else {
             call.reject("Must provide endDate")
             return
         }
@@ -568,7 +568,8 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
             call.reject("Must provide limit")
             return
         }
-
+        let _startDate = getDateFromString(inputDate: startDateString)
+        let _endDate = getDateFromString(inputDate: endDateString)
         let limit: Int = (_limit == 0) ? HKObjectQueryNoLimit : _limit
 
         var output: [String: [String: Any]] = [:]
